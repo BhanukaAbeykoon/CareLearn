@@ -1,11 +1,10 @@
 import time
 
-import self
-from selenium.common import NoSuchFrameException, NoSuchElementException
+from selenium.common import NoSuchFrameException, NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class AddCoursePage:
@@ -19,7 +18,7 @@ class AddCoursePage:
         self.modules_dropdown = (By.ID, "selNoOfModules")
 
     def navigate_to_courses(self):
-        global element_text1, element_text2, element_text3
+        global element_text1, element_text2, element_text3, text_area
         education_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[6]")
         education_button.click()
         time.sleep(5)
@@ -99,50 +98,158 @@ class AddCoursePage:
         # select modules
         self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[1]/select").click()
 
+        time.sleep(3)
+
         # select 3 modules
         self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[1]/select/option[3]").click()
 
-        try:
-            element = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/table/tbody/tr[1]/td[2]")
-            element_text1 = element.text.strip()
+        wait = WebDriverWait(self.driver, 10)  # 10 seconds timeout
 
-            if element_text1:
-                try:
-                    element = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/table/tbody/tr[2]/td[2]")
-                    element_text2 = element.text.strip()
-                except NoSuchElementException:
-                    element_text2 = None
-            elif element_text2:
-                try:
-                    element = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/table/tbody/tr[3]/td[2]")
-                    element_text3 = element.text.strip()
-                except NoSuchElementException:
-                    element_text3 = None
-            elif element_text3:
-                try:
-                    print("Available")
-                except NoSuchElementException:
-                    self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/table/tbody/tr[3]/td[2]").click()
-                    self.driver.switch_to.frame("dialogContainer")
-                    self.driver.switch_to.frame("dialogContainer")
-                    self.driver.switch_to.frame("dialogContainer")
-                    self.driver.find_element(By.XPATH, "/html/body/div/div[4]/input").send_keys("Test")
-                    self.driver.find_element(By.XPATH, "/html/body/div/div[5]/button[1]").click()
-
-
-        except NoSuchElemenException:
-            element_text1 = None
-            element_text2 = None
-            element_text3 = None
-        # text area select
-        text_area = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[11]/td[2]/textarea")
         time.sleep(3)
 
-        text_area.clear()
-        time.sleep(4)
+        def get_element_text(xpath):
+            try:
+                element = wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
+                return element.text.strip()
+            except TimeoutException:
+                return None
 
-        text_area.send_keys("test")
-        time.sleep(4)
+        time.sleep(3)
+
+        # Get text of the first element
+        element_text1 = get_element_text("/html/body/div/div[2]/div[2]/table/tbody/tr[1]/td[2]")
+
+        time.sleep(3)
+
+        if element_text1:
+            # Get text of the second element
+            time.sleep(3)
+
+            element_text2 = get_element_text("/html/body/div/div[2]/div[2]/table/tbody/tr[2]/td[2]")
+            time.sleep(3)
+            if element_text2:
+                # Get text of the third element
+                element_text3 = get_element_text("/html/body/div/div[2]/div[2]/table/tbody/tr[3]/td[2]")
+                time.sleep(3)
+                if not element_text3:
+                    try:
+                        # Click the third element and insert a value
+                        self.driver.find_element(By.XPATH,
+                                                 "/html/body/div/div[2]/div[2]/table/tbody/tr[3]/td[2]").click()
+                        time.sleep(3)
+                        self.driver.switch_to.frame("dialogContainer")
+                        self.driver.find_element(By.XPATH, "/html/body/div/div[4]/input").send_keys("Test")
+                        time.sleep(3)
+                        self.driver.find_element(By.XPATH, "/html/body/div/div[5]/button[1]").click()
+                        time.sleep(3)
+                        self.driver.switch_to.default_content()
+                        self.driver.switch_to.frame("dialogContainer")
+                        self.driver.switch_to.frame("dialogContainer")
+                        self.driver.switch_to.frame("dialogContainer")
+                        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[1]").click()
+                        time.sleep(3)
+                    except NoSuchElementException as e:
+                        print("An error occurred:", e)
+
+        # part enroll tick
+        time.sleep(3)
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        try:
+            element = WebDriverWait(self.driver, 3).until(
+                EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/table/tbody/tr[4]/td[2]/label/input'))
+            )
+
+            # Check if the element is a checkbox or radio button and its current state
+            if element.get_attribute('type') in ['checkbox', 'radio']:
+                if not element.is_selected():
+                    element.click()
+                    print("Element clicked.")
+                else:
+                    print("Element is already selected.")
+            else:
+                element.click()
+                print("Element clicked.")
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        time.sleep(3)
+        # Exam is ticked or not
+        try:
+            element = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, '/html/body/div/div[2]/table/tbody/tr[5]/td[2]/label/input'))
+            )
+
+            # Check if the element is a checkbox or radio button and its current state
+            if element.get_attribute('type') in ['checkbox', 'radio']:
+                if not element.is_selected():
+                    element.click()
+                    print("Element clicked.")
+                else:
+                    print("Element is already selected.")
+            else:
+                element.click()
+                print("Element clicked.")
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+        time.sleep(3)
+        # select grades
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[7]/td[2]/input").click()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[1]/table/tbody/tr[1]/td").click()
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[1]/table/tbody/tr[2]/td").click()
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/button[1]").click()
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[1]").click()
+
+        time.sleep(3)
+        # credit hours
+        CH = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[8]/td[2]/input").click()
+        CH.clear()
+        CH.send_keys("12")
+        time.sleep(3)
+
+        # certification
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[9]/td[2]/input").click()
+        time.sleep(3)
+
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[9]/td[2]/input").click()
+
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div/table/tbody/tr[3]/td").click()
+        time.sleep(3)
+
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[1]").click()
+        time.sleep(3)
+
+        #Renew months
+        self.driver.switch_to.default_content()
+        RM = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[10]/td[2]/input").click()
+        RM.clear()
+        RM.send_keys("3")
+        time.sleep(3)
+
+        # Text area select
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div/table/tbody/tr[2]/td").click()
+
+        try:
+            text_area = wait.until(
+                EC.element_to_be_clickable((By.XPATH, "/html/body/div/div[2]/table/tbody/tr[11]/td[2]/textarea")))
+            text_area.click()
+            time.sleep(3)
+            text_area.clear()
+            time.sleep(4)
+            text_area.send_keys("test")
+            time.sleep(4)
+        except TimeoutException:
+            print("Text area not found or not clickable")
 
         self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[1]").click()
         time.sleep(4)

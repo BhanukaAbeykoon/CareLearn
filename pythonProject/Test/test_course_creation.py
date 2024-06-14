@@ -4,9 +4,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Pages.Classes_Page import TestWebpageInteraction
-from Pages.Login_page import LoginPage
-from Pages.Add_course_page import AddCoursePage
+# from Pages.Login_page import LoginPage
+# from Pages.Add_course_page import AddCoursePage
+
+from pythonProject.Pages.Add_course_page import AddCoursePage
+from pythonProject.Pages.Login_page import LoginPage
 
 
 class TestCourseCreation(unittest.TestCase):
