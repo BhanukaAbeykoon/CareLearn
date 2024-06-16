@@ -209,9 +209,15 @@ class AddCoursePage:
 
         time.sleep(3)
         # credit hours
-        CH = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[8]/td[2]/input").click()
-        CH.clear()
-        CH.send_keys("12")
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        CH = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[8]/td[2]/input")
+        CH.click()
+        CH1 = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[8]/td[2]/input")
+        CH1.clear()
+        CH2 = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[8]/td[2]/input")
+        CH2.send_keys("12")
         time.sleep(3)
 
         # certification
@@ -219,7 +225,7 @@ class AddCoursePage:
         time.sleep(3)
 
         self.driver.switch_to.frame("dialogContainer")
-        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[9]/td[2]/input").click()
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div/table/tbody/tr[2]/td").click()
 
         time.sleep(3)
         self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div/table/tbody/tr[3]/td").click()
@@ -231,26 +237,32 @@ class AddCoursePage:
 
         #Renew months
         self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
         RM = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[10]/td[2]/input").click()
-        RM.clear()
-        RM.send_keys("3")
+        RM1 = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[10]/td[2]/input")
+        RM1.clear()
+        RM2 = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[10]/td[2]/input")
+        RM2.send_keys("3")
         time.sleep(3)
 
         # Text area select
-        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div/table/tbody/tr[2]/td").click()
 
         try:
             text_area = wait.until(
                 EC.element_to_be_clickable((By.XPATH, "/html/body/div/div[2]/table/tbody/tr[11]/td[2]/textarea")))
             text_area.click()
             time.sleep(3)
-            text_area.clear()
+            text_area1 = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[11]/td[2]/textarea")
+            text_area1.clear()
             time.sleep(4)
-            text_area.send_keys("test")
+            text_area2 = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/table/tbody/tr[11]/td[2]/textarea")
+            text_area2.send_keys("test")
             time.sleep(4)
         except TimeoutException:
             print("Text area not found or not clickable")
 
+        # Accept
         self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[1]").click()
         time.sleep(4)
 
