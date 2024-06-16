@@ -262,7 +262,7 @@ class AddCoursePage:
         except TimeoutException:
             print("Text area not found or not clickable")
 
-        # Accept
+        # Accept button
         self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[1]").click()
         time.sleep(4)
 
