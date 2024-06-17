@@ -1,14 +1,19 @@
 import unittest
+
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
+from pythonProject.Pages.AddClass import AddClass_Class
+from pythonProject.Pages.Add_Courses2 import AddCoursesClass
+from pythonProject.Pages.ReplicateClass import Replicate_Class
+from pythonProject.Pages.Add_courses_Enrollments import EnrollmentsClass
+from pythonProject.Pages.Courses_Report import CoursesReportClass
+from pythonProject.Pages.Login_page import LoginPage
+from pythonProject.Pages.Naviagete_to_Courses1 import AddCourseClass
+from pythonProject.Pages.process_Course_Enrollments import ProcessCourseEnrollmentClass
+
 
 # from Pages.Login_page import LoginPage
 # from Pages.Add_course_page import AddCoursePage
-
-from pythonProject.Pages.Add_course_page import AddCoursePage
-from pythonProject.Pages.Login_page import LoginPage
 
 
 class TestCourseCreation(unittest.TestCase):
@@ -18,19 +23,29 @@ class TestCourseCreation(unittest.TestCase):
 
     def test_course_creation(self):
         login_page = LoginPage(self.driver)
-        add_course_page = AddCoursePage(self.driver)
+        add_course = AddCourseClass(self.driver)
+        Add_Courses2 = AddCoursesClass(self.driver)
+        ReplicateClass = Replicate_Class(self.driver)
+        AddClass = AddClass_Class(self.driver)
+        Add_courses_Enrollments = EnrollmentsClass(self.driver)
+        process_Course_Enrollments = ProcessCourseEnrollmentClass(self.driver)
+        Courses_Report = CoursesReportClass(self.driver)
 
         login_page.login("admin", "admin")
+        #
+        # add_course.navigate_to_courses()
+        #
+        # Add_Courses2.add_course("Basic Life Support 2", "BLS")
+        #
+        # ReplicateClass.replicate_class()
+        #
+        # AddClass.add_class()
 
-        add_course_page.navigate_to_courses()
+        Add_courses_Enrollments.enrollments()
 
-        add_course_page.add_course("Basic Life Support 2", "BLS")
+        process_Course_Enrollments.process_course()
 
-        add_course_page.test_education_process()
-
-        add_course_page.process_course()
-
-        add_course_page.courses_report()
+        Courses_Report.courses_report()
 
 
 if __name__ == "__main__":
