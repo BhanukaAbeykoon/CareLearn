@@ -1,6 +1,9 @@
 import time
+from telnetlib import EC
 
+from selenium.common import TimeoutException, NoSuchElementException, ElementNotInteractableException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class AddClass_Class:
