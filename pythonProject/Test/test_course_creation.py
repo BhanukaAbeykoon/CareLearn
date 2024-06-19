@@ -4,11 +4,12 @@ from selenium import webdriver
 
 from pythonProject.Pages.AddClass import AddClass_Class
 from pythonProject.Pages.Add_Courses2 import AddCoursesClass
-from pythonProject.Pages.ReplicateClass import Replicate_Class
 from pythonProject.Pages.Add_courses_Enrollments import EnrollmentsClass
 from pythonProject.Pages.Courses_Report import CoursesReportClass
 from pythonProject.Pages.Login_page import LoginPage
 from pythonProject.Pages.Naviagete_to_Courses1 import AddCourseClass
+from pythonProject.Pages.ReplicateClass import Replicate_Class
+from pythonProject.Pages.TableFinder import TableFinderClass
 from pythonProject.Pages.process_Course_Enrollments import ProcessCourseEnrollmentClass
 
 
@@ -28,6 +29,7 @@ class TestCourseCreation(unittest.TestCase):
         ReplicateClass = Replicate_Class(self.driver)
         AddClass = AddClass_Class(self.driver)
         Add_courses_Enrollments = EnrollmentsClass(self.driver)
+        TableFinder = TableFinderClass(self.driver)
         process_Course_Enrollments = ProcessCourseEnrollmentClass(self.driver)
         Courses_Report = CoursesReportClass(self.driver)
 
@@ -41,11 +43,13 @@ class TestCourseCreation(unittest.TestCase):
         #
         # AddClass.add_class()
 
-        Add_courses_Enrollments.enrollments()
+        # Add_courses_Enrollments.enrollments()
 
-        process_Course_Enrollments.process_course()
+        TableFinder.table_data_find()
 
-        Courses_Report.courses_report()
+        # process_Course_Enrollments.process_course()
+        #
+        # Courses_Report.courses_report()
 
 
 if __name__ == "__main__":
