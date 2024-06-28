@@ -3,12 +3,12 @@ import time
 from selenium.webdriver.common.by import By
 
 
-class TableFinderClass:
+class Modify_Module_List_Class:
     def __init__(self, driver):
         self.driver = driver
         self.dialog_container = "dialogContainer"
 
-    def table_data_find(self):
+    def modify_module_list(self):
         time.sleep(3)
         self.driver.switch_to.default_content()
 
@@ -72,9 +72,11 @@ class TableFinderClass:
         self.driver.switch_to.frame("dialogContainer")
         self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[3]/table/tbody/tr[2]/td").click()
         time.sleep(3)
+
         # click remove
         self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/button[3]").click()
         time.sleep(3)
+
         # click accept button
         self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[1]").click()
         time.sleep(3)

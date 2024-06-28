@@ -22,25 +22,31 @@ class CoursesReportClass(unittest.TestCase):
 
         time.sleep(5)
 
+        # course attendance report button
         driver.find_element(By.XPATH, "/html/body/div[2]/div[6]/div/button[4]").click()
         time.sleep(3)
 
+        # select from
         driver.switch_to.frame("dialogContainer")
         driver.find_element(By.XPATH, "/html/body/div/div[3]/div[1]/input[1]").click()
         time.sleep(3)
 
+        # select a date
         driver.switch_to.frame("dialogContainer")
-        driver.find_element(By.XPATH, "/html/body/div/div[3]/table/tbody/tr[1]/td[2]").click()
+        driver.find_element(By.XPATH, "/html/body/div/div[3]/table/tbody/tr[1]/td[7]").click()
         time.sleep(3)
 
+        # click accept button
         driver.find_element(By.XPATH, "/html/body/div/div[4]/button[2]").click()
         time.sleep(3)
 
+        # click produce report button
         driver.switch_to.default_content()
         driver.switch_to.frame("dialogContainer")
         driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/button[1]").click()
         time.sleep(3)
 
+        # print to HTML
         driver.switch_to.default_content()
         driver.switch_to.frame("dialogContainer")
         driver.switch_to.frame("dialogContainer")
@@ -50,50 +56,9 @@ class CoursesReportClass(unittest.TestCase):
         driver.switch_to.window(driver.window_handles[0])
         time.sleep(3)
 
+        # print to Excel
         driver.switch_to.default_content()
         driver.switch_to.frame("dialogContainer")
         driver.switch_to.frame("dialogContainer")
         driver.find_element(By.XPATH, "/html/body/div/div[4]/button[3]").click()
         time.sleep(3)
-
-    # self.driver.switch_to.default_content()
-    #
-    # self.driver.switch_to.frame("dialogContainer")
-    #
-    # time.sleep(3)
-    #
-    # # select table row 4
-    # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[2]/table/tbody/tr[4]").click()
-    # time.sleep(3)
-    #
-    # # select make inactive
-    # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/button[4]").click()
-    # time.sleep(5)
-
-    #
-    # self.driver.switch_to.default_content()
-    #
-    # education_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[6]")
-    # education_button.click()
-    # time.sleep(5)
-    #
-    # courses_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[6]/div/button[1]")
-    # courses_button.click()
-    # time.sleep(10)
-    #
-    # try:
-    #     self.driver.switch_to.frame("dialogContainer")
-    # except NoSuchFrameException as e:
-    #     print("Error: Unable to switch to the dialogContainer frame.")
-    #     print(e)
-    #     return
-    #
-    # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[4]/button[1]").click()
-    #
-    # time.sleep(3)
-    #
-    # self.driver.switch_to.frame("dialogContainer")
-    #
-    # self.driver.find_element(By.XPATH, "/html/body/div/div[4]/button[2]").click()
-    #
-    # time.sleep(3)
