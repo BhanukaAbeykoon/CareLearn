@@ -1,7 +1,8 @@
 import time
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class LoginPage:
@@ -23,5 +24,5 @@ class LoginPage:
         except:
             pass
 
-        WebDriverWait(self.driver, 100).until(
+        WebDriverWait(self.driver, 10).until(
             EC.url_to_be("https://demo5.caresystemsinc.com/demo5/html_interface/manager/desktop.jsp"))
