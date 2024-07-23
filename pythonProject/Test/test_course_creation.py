@@ -56,9 +56,8 @@ class TestCourseCreation(unittest.TestCase):
         #
         # Courses_Report.courses_report()
 
-        login_page_Student.login_student("user8", "admin")
+        # login_page_Student.login_student("user8", "admin")
 
-        #
         Student_Enrollment.student()
 
 

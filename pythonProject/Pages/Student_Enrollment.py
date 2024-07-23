@@ -1,9 +1,6 @@
 import time
-from telnetlib import EC
 
-from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 
 from pythonProject.Pages.Login_page_Admin import LoginPage
 
@@ -65,69 +62,61 @@ class StudentEnrollmentClass:
         login_page.login("admin", "admin")
         time.sleep(3)
 
-        # Click Education button
-        time.sleep(3)
+        # # Click Education button
+        # time.sleep(3)
+        # self.driver.switch_to.default_content()
+        # education_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[6]")
+        # education_button.click()
+        # time.sleep(5)
+        #
+        # # process course enrollment button
+        # process_course_enrollment_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[6]/div/button[3]")
+        # process_course_enrollment_button.click()
+        # time.sleep(3)
+        #
+        # # view enrollments from
+        # self.driver.switch_to.frame("mainWindow")
+        # self.driver.find_element(By.XPATH, "/html/body/div[1]/input").click()
+        # time.sleep(3)
+        #
+        # # select a month
+        # self.driver.switch_to.default_content()
+        # self.driver.switch_to.frame("dialogContainer")
+        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[1]/select[1]").click()
+        # time.sleep(3)
+        #
+        # # select january
+        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[1]/select[1]/option[1]").click()
+        # time.sleep(3)
+        # # select january 1st
+        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/table/tbody/tr[1]/td[2]").click()
+        # time.sleep(3)
+        #
+        # # Accept
+        # self.driver.find_element(By.XPATH, "/html/body/div/div[4]/button[2]").click()
+        # time.sleep(3)
+        #
+        # # select pending record
+        # self.driver.switch_to.default_content()
+        # self.driver.switch_to.frame("mainWindow")
+        # self.driver.find_element(By.CSS_SELECTOR, "td[title='Preceptorship P005']").click()
+        # time.sleep(3)
+        #
+        # # click approve button
+        # self.driver.find_element(By.CSS_SELECTOR, "#apprBtn").click()
+        # time.sleep(3)
+        #
+        # # confirm approval
+        # self.driver.switch_to.default_content()
+        # self.driver.switch_to.frame("dialogContainer")
+        # self.driver.find_element(By.CSS_SELECTOR, "button[class='primaryBtn thinBtn marginRight']").click()
+        # time.sleep(3)
+
+        # click my menu
         self.driver.switch_to.default_content()
-        education_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[6]")
-        education_button.click()
-        time.sleep(5)
-
-        # process course enrollment button
-        process_course_enrollment_button = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[6]/div/button[3]")
-        process_course_enrollment_button.click()
+        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
         time.sleep(3)
 
-        # view enrollments from
-        self.driver.switch_to.frame("mainWindow")
-        self.driver.find_element(By.XPATH, "/html/body/div[1]/input").click()
+        #  click log out button
+        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]/div/button[16]").click()
         time.sleep(3)
-
-        # select a month
-        self.driver.switch_to.default_content()
-        self.driver.switch_to.frame("dialogContainer")
-        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[1]/select[1]").click()
-        time.sleep(3)
-
-        # select january
-        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[1]/select[1]/option[1]").click()
-        time.sleep(3)
-        # select january 1st
-        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/table/tbody/tr[1]/td[2]").click()
-        time.sleep(3)
-
-        # Accept
-        self.driver.find_element(By.XPATH, "/html/body/div/div[4]/button[2]").click()
-        time.sleep(3)
-
-        # select Pending record
-        try:
-            # Wait for the table to be present
-            table = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/table"))
-            )
-
-            # Check if "Pending" is within the table
-            pending_in_table = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/table//*[contains(text(), 'Pending')]"))
-            )
-
-            if pending_in_table:
-                # Click the table
-                table.click()
-                time.sleep(3)  # Optional, but better to use explicit waits if possible
-
-                # Click the "Pending" element
-                pending = WebDriverWait(self.driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, "//*[contains(text(), 'Pending')]"))
-                )
-                pending.click()
-                time.sleep(3)  # Optional, but better to use explicit waits if possible
-
-        except TimeoutException:
-            print("Table or Pending element could not be found.")
-
-        # click approve button
-        self.driver.find_element(By.XPATH, "/html/body/div[5]/div/button[1]").click()
-
-
-
