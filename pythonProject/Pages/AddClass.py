@@ -199,8 +199,13 @@ class AddClass_Class:
                     EC.presence_of_element_located((by, value))
                 )
                 return element.is_enabled()
-            except (TimeoutException, NoSuchElementException):
-                return False
+            except TimeoutException:
+                return False  # Element is not present within timeout
+            except NoSuchElementException:
+                return False  # Element is not found
+            except Exception as e:
+                print(f"An exception occurred: {e}")
+                return False  # Other exceptions
 
         try:
             add_module_xpath = "/html/body/div/div[3]/div[1]/div[1]/button[1]"
