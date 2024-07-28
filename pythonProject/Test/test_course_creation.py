@@ -50,13 +50,14 @@ class TestCourseCreation(unittest.TestCase):
         #
         # ModifyClass.enrollments()
         #
-        # when selecting select not canceled
-        # when enrolling change employee
-        Add_courses_Enrollments.enrollments()
+        # when selecting selected not canceled
+        # when enrolling change employee - issue with selecting employee
+        # Add_courses_Enrollments.enrollments()
         #
+        # not available for cancelled and some courses that are not in period
         # ModifyModuleList.modify_module_list()
         #
-        # process_Course_Enrollments.process_course()
+        process_Course_Enrollments.process_course()
         #
         # Courses_Report.courses_report()
 
