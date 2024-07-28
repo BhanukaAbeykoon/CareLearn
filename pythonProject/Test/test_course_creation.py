@@ -36,19 +36,23 @@ class TestCourseCreation(unittest.TestCase):
         Courses_Report = CoursesReportClass(self.driver)
         Student_Enrollment = StudentEnrollmentClass(self.driver)
 
-        # login_page.login("admin", "admin")
+        login_page.login("admin", "admin")
         #
         # add_course.navigate_to_courses()
         #
         # Add_Courses2.add_course("Basic Life Support 2", "BLS")
         #
+        # when replicating same class id course fee
         # ReplicateClass.replicate_class()
-        #
+
+        # when adding same class id
         # AddClass.add_class()
         #
         # ModifyClass.enrollments()
         #
-        # Add_courses_Enrollments.enrollments()
+        # when selecting select not canceled
+        # when enrolling change employee
+        Add_courses_Enrollments.enrollments()
         #
         # ModifyModuleList.modify_module_list()
         #
@@ -58,7 +62,7 @@ class TestCourseCreation(unittest.TestCase):
 
         # login_page_Student.login_student("user8", "admin")
 
-        Student_Enrollment.student()
+        # Student_Enrollment.student()
 
 
 if __name__ == "__main__":

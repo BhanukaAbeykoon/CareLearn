@@ -49,80 +49,86 @@ class EnrollmentsClass:
         self.driver.find_element(By.XPATH, "/html/body/div/div[4]/button[2]").click()
         time.sleep(5)
 
-        # # enrollments
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("mainWindow")
-        # self.driver.find_element(By.XPATH, "/html/body/div[2]/table/tbody/tr[7]/td[1]").click()
-        # time.sleep(3)
-        #
-        # # Enrollment button
-        # self.driver.find_element(By.XPATH, "/html/body/div[4]/button[5]").click()
-        # time.sleep(3)
-        #
-        # # Enroll Employees
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/button[1]").click()
-        # time.sleep(3)
-        #
-        # # primary search button
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[1]/button[1]").click()
-        # time.sleep(3)
-        #
-        # # search button
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[2]").click()
-        # time.sleep(3)
-        #
-        # # Employee select
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[3]/table/tbody/tr[83]/td[1]").click()
-        # time.sleep(3)
-        #
-        # # accept
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[5]/button[1]").click()
-        # time.sleep(3)
-        #
-        # # data
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[2]/table/tbody/tr/td[1]").click()
-        # time.sleep(3)
-        #
-        # # cancel enrollment
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/div/button[3]").click()
-        # time.sleep(3)
-        #
-        # # approve enrollment
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[5]/button[1]").click()
-        # time.sleep(3)
-        #
-        # # View employee info button
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/div/button[4]").click()
-        # time.sleep(3)
-        #
-        # # view employee info button close
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[1]").click()
-        # time.sleep(3)
-        #
-        # # enrollments  button close
-        # self.driver.switch_to.default_content()
-        # self.driver.switch_to.frame("dialogContainer")
-        # self.driver.find_element(By.XPATH, "/html/body/div/div[1]").click()
+        # select a record(7)
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("mainWindow")
+        self.driver.find_element(By.XPATH, "/html/body/div[2]/table/tbody/tr[7]/td[1]").click()
+        time.sleep(3)
+
+        # Enrollment button
+        self.driver.find_element(By.XPATH, "/html/body/div[4]/button[5]").click()
+        time.sleep(3)
+
+        # Enroll Employees
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/button[1]").click()
+        time.sleep(3)
+
+        # primary search button
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[1]/button[1]").click()
+        time.sleep(5)
+
+        # search button
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/button[2]").click()
+        time.sleep(9)
+
+        # Employee select
+        # change employee
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[3]/table/tbody/tr[110]/td[1]").click()
+        time.sleep(6)
+
+        # accept
+        self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[5]/button[1]").click()
+        time.sleep(3)
+
+        # keep & Truncate
+        keep_truncate = self.driver.find_element(By.XPATH, "/html/body/div/div[5]/button[2]")
+        if keep_truncate.is_enabled():
+            keep_truncate.click()
+        else:
+            # data
+            self.driver.switch_to.default_content()
+            self.driver.switch_to.frame("dialogContainer")
+            self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[2]/table/tbody/tr/td[1]").click()
+            time.sleep(3)
+
+        # cancel enrollment
+        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/div/button[3]").click()
+        time.sleep(3)
+
+        # approve enrollment
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[5]/button[1]").click()
+        time.sleep(3)
+
+        # View employee info button
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[3]/div[3]/div/button[4]").click()
+        time.sleep(3)
+
+        # view employee info button close
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[1]").click()
+        time.sleep(3)
+
+        # enrollments  button close
+        self.driver.switch_to.default_content()
+        self.driver.switch_to.frame("dialogContainer")
+        self.driver.find_element(By.XPATH, "/html/body/div/div[1]").click()
 
