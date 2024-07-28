@@ -1,6 +1,5 @@
 import time
 
-from selenium.webdriver.chrome import webdriver
 from selenium.webdriver.common.by import By
 
 
@@ -47,7 +46,7 @@ class EnrollmentsClass:
 
         # accept button
         self.driver.find_element(By.XPATH, "/html/body/div/div[4]/button[2]").click()
-        time.sleep(5)
+        time.sleep(10)
 
         # select a record(7)
         self.driver.switch_to.default_content()
@@ -85,7 +84,7 @@ class EnrollmentsClass:
         self.driver.switch_to.default_content()
         self.driver.switch_to.frame("dialogContainer")
         self.driver.switch_to.frame("dialogContainer")
-        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[3]/table/tbody/tr[110]/td[1]").click()
+        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[3]/table/tbody/tr[372]/td[1]").click()
         time.sleep(6)
 
         # accept
@@ -131,4 +130,3 @@ class EnrollmentsClass:
         self.driver.switch_to.default_content()
         self.driver.switch_to.frame("dialogContainer")
         self.driver.find_element(By.XPATH, "/html/body/div/div[1]").click()
-
